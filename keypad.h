@@ -75,9 +75,6 @@ class Keypad {
     /** Confirmed Column on which the button was pressed (after row-scanning) */
     uint32_t            pressedCol {};
 
-    //!
-    Semaphore           threadRunLock;
-
 public:
 
     Keypad() = delete;

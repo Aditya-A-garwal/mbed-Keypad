@@ -11,7 +11,6 @@ constexpr auto LONG_PRESS_THRESH = 300ms;
 Keypad::Keypad(PinName r0, PinName r1, PinName r2, PinName r3, PinName c0, PinName c1, PinName c2, PinName c3)
         : row{{r0}, {r1}, {r2}, {r3}}
         , col{{c0}, {c1}, {c2}, {c3}}
-        , threadRunLock(0, 1)
 {
     // Use the internal pullup resistors for all the interrupt pins (cols) and switch the rows off
     // whenever a button is pressed, its corresponding column is pulled low, i.e. a fall interrupt happens
@@ -84,12 +83,7 @@ Keypad::finalize() {
     }
 
     queue.break_dispatch();
-    threadRunLock.acquire();
-
-    auto status = threadHandle->terminate();
-    if (status != osOK) {
-        return false;
-    }
+    threadHandle->join();
 
     delete threadHandle;
     threadHandle = nullptr;
@@ -275,7 +269,6 @@ void
 Keypad::dispatch_events() {
 
     queue.dispatch_forever();
-    threadRunLock.release();
 }
 
 //bool
