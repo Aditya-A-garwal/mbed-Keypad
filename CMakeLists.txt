@@ -19,3 +19,8 @@ target_sources(mbed-Keypad
         keypad.cpp
         keypadBlocking.cpp
 )
+
+target_link_libraries(mbed-Keypad
+    INTERFACE
+        mbed-events
+)
