@@ -270,14 +270,3 @@ Keypad::dispatch_events() {
 
     queue.dispatch_forever();
 }
-
-//bool
-//Keypad::transition_state(const ButtonState &fromState, const ButtonState &toState) {
-//
-//    if (state != fromState) {
-//        return false;
-//    }
-//
-//    state = toState;
-//    return true;
-//}

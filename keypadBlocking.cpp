@@ -136,8 +136,6 @@ KeypadBlocking::pop_longpress() {
         return false;
     }
 
-    //*rptr = cur.r;
-    //*cptr = cur.c;
     return true;
 }
 
