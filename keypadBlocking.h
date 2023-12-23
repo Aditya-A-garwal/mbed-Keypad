@@ -1,3 +1,13 @@
+/**
+ * @file                    KeypadBlocking.h
+ * @author                  Aditya Agarwal (aditya.agarwal@dumblebots.com)
+ *
+ * @brief                   Simple Library to use a 4x4 Keypad sensor with MBed OS
+ *
+ * @copyright               Copyright (c) 2023
+ *
+ */
+
 #ifndef __KEYPADBLOCKING_H__
 #define __KEYPADBLOCKING_H__
 

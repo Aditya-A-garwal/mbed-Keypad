@@ -1,3 +1,14 @@
+/**
+ * @file                    Keypad.h
+ * @author                  Aditya Agarwal (aditya.agarwal@dumblebots.com)
+ *
+ * @brief                   Simple Library to use a 4x4 Keypad with MBed OS asynchronously
+ *
+ * @copyright               Copyright (c) 2023
+ *
+ */
+
+
 #ifndef __KEYPAD_H__
 #define __KEYPAD_H__
 
@@ -5,11 +16,11 @@
 #include "platform/CircularBuffer.h"
 
 /** Maximum number of presses/releases/long-presses to queue up before overwriting */
-constexpr auto KEYPAD_BUFFER_LEN = 16;
+constexpr auto      KEYPAD_BUFFER_LEN   = 16;
 /** Number of rows on a keypad */
-constexpr auto KEYPAD_NUM_ROWS = 4;
+constexpr auto      KEYPAD_NUM_ROWS     = 4;
 /** Number of columns on a keypad */
-constexpr auto KEYPAD_NUM_COLS = 4;
+constexpr auto      KEYPAD_NUM_COLS     = 4;
 
 /**
  * @brief                   Class that provides a simple interface to use a 4x4 keypad asynchronously
@@ -98,7 +109,7 @@ public:
      * @brief               Initializes the object by allocating and starting a thread to dispatch callbacks on
      *
      * @remark              If the thread was already initialized, then the Keypad::finalize() method must be called
-     *                      before trying to initialize it again
+     *                      before trying to re-initialize
      *
      * @attention           Can not call this method from ISR context
      * @attention           It is unsafe to call this method from multiple threads concurrently
@@ -112,12 +123,10 @@ public:
      * @brief               Finalizes the object by stopping and freeing the thread on which callbacks are dispatched
      *
      * @remark              If the thread was not initialized or finalized before, then the Keypad::initialize()
-     *                      method must be called before trying to finalize it again
+     *                      method must be called before trying to re-finalize it
      * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
      *                      methods are called, they must be explicitly disabled by calling their respective remove
      *                      methods
-     * @remark              This method will always return false (failed finalization) as long as there are
-     *                      pending non-periodic measurements or a registered periodic measurement
      *
      * @attention           Can not call this method from ISR context
      * @attention           It is unsafe to call this method from multiple threads concurrently
@@ -163,7 +172,7 @@ public:
     /**
      * @brief               Remove the previously registered callback function for when a button is pressed
      *
-     * @remark              Does nothing if no callback was registered
+     * @remark              Has no effect if no callback was registered
      * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
      *                      methods are called, they must be explicitly disabled by calling their respective remove
      *                      methods
@@ -207,7 +216,7 @@ public:
     /**
      * @brief               Remove the previously registered callback function for when a button is released
      *
-     * @remark              Does nothing if no callback was registered
+     * @remark              Has no effect if no callback was registered
      * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
      *                      methods are called, they must be explicitly disabled by calling their respective remove
      *                      methods
@@ -220,6 +229,10 @@ public:
 
     /**
      * @brief               Checks if a callback function is registered for when a button is released
+     *
+     * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
+     *                      methods are called, they must be explicitly disabled by calling their respective remove
+     *                      methods
      *
      * @return              true if a callback is currently registered, false otherwise
      *
@@ -247,7 +260,7 @@ public:
     /**
      * @brief               Remove the previously registered callback function for when a button was long-pressed
      *
-     * @remark              Does nothing if no callback was registered
+     * @remark              Has no effect if no callback was registered
      * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
      *                      methods are called, they must be explicitly disabled by calling their respective remove
      *                      methods
@@ -260,6 +273,10 @@ public:
 
     /**
      * @brief               Checks if a callback function is registered for when a button is long-pressed
+     *
+     * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
+     *                      methods are called, they must be explicitly disabled by calling their respective remove
+     *                      methods
      *
      * @remark              Any registered callbacks are preserved when the Keypad::initialize() and Keypad::finalize()
      *                      methods are called, they must be explicitly disabled by calling their respective remove
